@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.xlsx
+~$*.xlsx
+pagina.html
+test_pagination.py
+Base de datos.code-workspace
+.venv/
+venv/
+env/
+.env
