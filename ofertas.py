@@ -6,9 +6,29 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
+from datetime import datetime
+
+# Función para determinar el ciclo escolar actual
+def obtener_ciclo_actual():
+    hoy = datetime.now()
+    anio = hoy.year
+    mes = hoy.month
+    
+    # En la UdeG: 
+    # Calendario A (ej. 202510) abarca aprox de Enero a Junio/Julio. 
+    # Calendario B (ej. 202520) abarca aprox de Agosto a Diciembre.
+    # Asignaremos el ciclo 10 para los meses de Enero (1) a Junio (6)
+    # Asignaremos el ciclo 20 para los meses de Julio (7) a Diciembre (12)
+    # (Los ajustes de meses pueden variar si el webmaster sube la oferta antes, pero esta heurística funciona comúnmente)
+    if mes <= 6:
+        sufijo = "10"
+    else:
+        sufijo = "20"
+        
+    return f"{anio}{sufijo}"
 
 # Configuración
-CICLO = "202520"
+CICLO = obtener_ciclo_actual()
 CENTRO = "D"
 ORDEN = "0"
 MOSTRAR = "500"
