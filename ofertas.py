@@ -142,6 +142,8 @@ while True:
 
 driver.quit()
 
+import os
+
 # Guardar Excel con los nombres de columnas exactos y separados solicitados
 columnas = [
     "NRC", "Clave", "Materia", "Sec", "CR", "CUP", "DIS", 
@@ -149,7 +151,11 @@ columnas = [
     "Ses (Profesor)", "Profesor"
 ]
 df = pd.DataFrame(datos, columns=columnas)
-archivo = f"oferta_siiau_{CICLO}_{CENTRO}.xlsx"
+
+# Generar ruta absoluta basada en la ubicación de este script
+directorio_actual = os.path.dirname(os.path.abspath(__file__))
+nombre_archivo = f"oferta_siiau_{CICLO}_{CENTRO}.xlsx"
+archivo = os.path.join(directorio_actual, nombre_archivo)
 
 # Guardar a un archivo excel y ajustar ancho de columnas
 with pd.ExcelWriter(archivo, engine='openpyxl') as writer:
